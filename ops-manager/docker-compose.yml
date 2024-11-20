@@ -276,5 +276,47 @@ services:
       - "3903:3903"
       - "3904:3904"
 
+  openldap:
+    image: osixia/openldap:1.5.0
+    container_name: openldap
+    deploy:
+      resources:
+        limits:
+          cpus: '0.500'
+          memory: 0.50G
+        reservations:
+          cpus: '0.333'
+          memory: 0.33G
+    environment:
+      LDAP_LOG_LEVEL: "256"
+      LDAP_ORGANISATION: TSDocker
+      LDAP_DOMAIN: tsdocker.com
+      LDAP_BASE_DN: ""
+      LDAP_ADMIN_PASSWORD: "admin"
+      LDAP_CONFIG_PASSWORD: "config"
+      # ****** TLS Relevant Settigns Start
+      LDAP_TLS: "false"
+      LDAP_TLS_CRT_FILENAME: "server.om.internal.crt"
+      LDAP_TLS_KEY_FILENAME: "server.om.internal.key"
+      LDAP_TLS_CA_CRT_FILENAME: "mongodb-ca.pem"
+      LDAP_TLS_VERIFY_CLIENT: "never"
+      # ****** TLS Relevant Settigns End
+    tty: true
+    stdin_open: true
+    hostname: ldap.om.internal
+    networks:
+      main:
+        aliases:
+          - ldap
+          - ldap.om.internal
+          - ldap.alt.internal
+    volumes:
+      - /var/lib/ldap
+      - /etc/ldap/slapd.d
+      - ./ldap:/ldap
+      - ./certs:/container/service/slapd/assets/certs
+    ports:
+      - "389:389"
+      - "636:636"
 networks:
   main:

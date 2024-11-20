@@ -94,6 +94,15 @@ do
       docker image rm ops-manager-ops ops-manager-node1 ops-manager-node2 ops-manager-node3 metadata s3 smtp lb proxy blockstore oplog 2>&1
       break
       ;;
+    LDAP)
+      docker compose up -d openldap
+      echo "Initialiing OpenLDAP and add users"
+      sleep 4
+      docker exec openldap ldapadd -x -w admin -D cn=admin,dc=tsdocker,dc=com -f /ldap/groups.ldif 2>&1
+      docker exec openldap ldapadd -x -w admin -D cn=admin,dc=tsdocker,dc=com -f /ldap/users.ldif 2>&1
+      echo "Done"
+      break
+      ;;
     Quit)
       echo "Bye."
       break
