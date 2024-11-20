@@ -1,6 +1,6 @@
 #!/bin/bash
 echo Please choose some extras: 
-platform_options=("pause" "un-pause" "more-servers" "oplog" "blockstore" "proxy" "load-balancer" "smtp" "s3" "clean" "Quit")
+platform_options=("pause" "un-pause" "more-servers" "oplog" "blockstore" "proxy" "load-balancer" "smtp" "s3" "ldap" "clean" "Quit")
 select opt in "${platform_options[@]}"
 do
   case $opt in
