@@ -1,4 +1,5 @@
 ## Information
+A basic OpenLDAP container to allow quick testing/repro of OpsManager & MongoDB with LDAP.
 
 This image uses osixia OpenLDAP[ https://github.com/osixia/docker-openldap ] and inspiration from om_ansible[ https://github.com/HenryGP/om_ansible ] to provision  predefined set of users and groups for quickly testing LDAP integration with MongoDB Enterprise and MongoDB Ops Manager. These can be found in `ldif/users.ldif` and `ldif/groups.ldif` respectively.
 
@@ -7,7 +8,6 @@ Testing has been done using LDAP/LDAPS and Native LDAP.
 ## User and groups structure
 
 All users have the same password, `Password1!`. The following users have been predefined:
-LDAP bind user `admin` has the password `admin`
 
 ### MongoDB database users
 |User|MemberOf|
@@ -60,7 +60,7 @@ LDAP bind user `admin` has the password `admin`
 ### LDAP authorization with MongoDB
 1. Check the membership of pre-defined users in LDAP:
    ```
-   ldapsearch -x -LLL -D 'cn=admin,dc=tsdocker,dc=com' -w admin -b 'ou=dbUsers,dc=tsdocker,dc=com' memberOf -h ldap://ldap.om.internal:389
+   ldapsearch -x -LLL -D 'cn=admin,dc=tsdocker,dc=com' -w Password1! -b 'ou=dbUsers,dc=tsdocker,dc=com' memberOf -h ldap://ldap.om.internal:389
    ```
 1. On the MongoDB instance, set the following parameters for the `mongod` configuration file:
    ```
@@ -71,7 +71,7 @@ LDAP bind user `admin` has the password `admin`
        bind:
          method: "simple"
          queryUser: "cn=admin,dc=tsdocker,dc=com"
-         queryPassword: "admin"
+         queryPassword: "Password1!"
        transportSecurity: "none"
        userToDNMapping:
          '[

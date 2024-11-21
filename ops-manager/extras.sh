@@ -84,12 +84,12 @@ do
       docker exec -it s3 ./garage bucket allow blockstore --key my-key --read --write --owner 2>&1
       break
       ;;
-    LDAP)
+    ldap)
       docker compose up -d openldap
       echo "Initialiing OpenLDAP and add users"
       sleep 4
-      docker exec openldap ldapadd -x -w admin -D cn=admin,dc=tsdocker,dc=com -f /ldap/groups.ldif 2>&1
-      docker exec openldap ldapadd -x -w admin -D cn=admin,dc=tsdocker,dc=com -f /ldap/users.ldif 2>&1
+      docker exec openldap ldapadd -x -w Password1! -D cn=admin,dc=tsdocker,dc=com -f /ldap/groups.ldif 2>&1
+      docker exec openldap ldapadd -x -w Password1! -D cn=admin,dc=tsdocker,dc=com -f /ldap/users.ldif 2>&1
       echo "Done"
       break
       ;;
