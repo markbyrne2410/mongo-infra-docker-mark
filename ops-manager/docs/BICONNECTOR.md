@@ -12,5 +12,8 @@ docker exec -it ops -- /bin/bash
 ```
 mv /opt/mongodb/mms/agent/biconnector/mongodb-bi-linux-arm64-rhel82-v2.14.13.tgz /opt/mongodb/mms/agent/biconnector/mongodb-bi-linux-x86_64-rhel80-v2.14.13.tgz
 ```
+For Ops Manager version 8, please use this command instead:
+mv /opt/mongodb/mms/agent/biconnector/mongodb-bi-linux-arm64-rhel82-v2.14.17.tgz /opt/mongodb/mms/agent/biconnector/mongodb-bi-linux-x86_64-amzn64-v2.14.17.tgz
+
 3. Now install the BI Connector on your node via Ops Manager, I suggest to configure it on port 27719.
 4. Access localhost 27719 on your mac with a mysql client to access the bi connector on your node.
