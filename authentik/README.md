@@ -67,7 +67,7 @@ This part is not working yet, could be Ops Manager (works with everything else) 
 - LDAP Bind Password: `whatever you set in authentik`
 - LDAP User Base Dn: dc=ldap,dc=goauthentik,dc=io
 - LDAP User Search Attribute: could be `sAMAccountName` (if you gave a name like akadmin for your user) or `mail` (if you gave your email address)
-- LDAP User Group: member
+- LDAP User Group: memberOf (or LDAP Group Member Attribute: member)
 - LDAP Global Role Owner: cn=authentik Admins,ou=groups,dc=ldap,dc=goauthentik,dc=io `if you used akadmin/root@example.com`
 
 ## Setup LDAP for an MongoDB Deployment
