@@ -137,7 +137,7 @@ services:
     ports:
       - "5800:5800"
     volumes:
-      - "/docker/appdata/firefox:/config:rw"
+      - "./docker/appdata/firefox:/config:rw"
 
 networks:
   ops-manager_main:
