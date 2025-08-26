@@ -87,6 +87,12 @@ If you followed steps 1 - 5 you should have something like this within 10 minute
 
 ![Ops Manager Example](ops-manager/docs/images/Example.png)
 
+### Clean Up
+
+If you want to remove all artifacts run `bash extras.sh` then select the `clean` option.
+
+**Note** This tries to clean up everything, even items you didn't setup this time, so you might see one or two errors, its normal.
+
 ## Hints and tips
 
 - Ops Manager needs 8G RAM to run reliably, an Agent 2.5G, so for Monitoring/Automation your looking at giving docker 10.5G
