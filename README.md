@@ -28,6 +28,7 @@ For more complex tests the following have been included already. Nothing is stop
 | Prometeus/Grafana | Yes | [Enable Prometheus](/prometheus/README.md) |
 | LDAP | Yes | [Authentik](/authentik/README.md) |
 | OIDC | Maybe | [Authentik](/authentik/README.md) |
+| SAML | Yes | [Authentik](/authentik/README.md) |
 | Kerberos | No | Not included yet |
 | KMIP | Yes | `kmip.om.internal` on 5696, based on [PyKMIP](https://pykmip.readthedocs.io/en/latest/index.html) |
 
