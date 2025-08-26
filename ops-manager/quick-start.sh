@@ -9,45 +9,32 @@ then
   exit 1
 fi
 
-version_options=("8-0-6" "7-0-15" "6-0-25" "downloaded")
+version_options=("8-0-12" "7-0-17" "downloaded")
 echo Please choose a version: 
 select opt in "${version_options[@]}"
 do
   case $opt in
-    8-0-6)
-      export version='8.0.6'
+    8-0-12)
+      export version='8.0.12'
       export version_for_url='8.0'
       touch downloads/8.ver 2>&1
       rm downloads/7.ver 2>&1
       rm downloads/6.ver 2>&1
       break
       ;;
-    7-0-15)
-      export version='7.0.15'
+    7-0-17)
+      export version='7.0.17'
       export version_for_url='7.0'
       rm downloads/8.ver 2>&1
       touch downloads/7.ver 2>&1
       rm downloads/6.ver 2>&1
       break
       ;;
-    6-0-25)
-      export version='6.0.25'
-      export version_for_url='6.0'
+    downloaded)
+      export skip_download='true'
       rm downloads/8.ver 2>&1
       rm downloads/7.ver 2>&1
-      touch downloads/6.ver 2>&1
-      break
-      ;;    
-    downloaded)
-      if [ -e downloads/7.ver ]
-      then
-        export version='7.0.10'
-        export version_for_url='7.0'
-      else
-        export version='6.0.25'
-        export version_for_url='6.0'
-      fi
-      export skip_download='true'
+      rm downloads/6.ver 2>&1
       break
       ;;
     *)
@@ -100,19 +87,14 @@ do
 done
 
 # Set up urls based on the above parameters
-if [[ "$version" == "8.0.6" ]] # Updates JDK to jdk-21.0.6+7.
+if [[ "$version" == "8.0.12" ]] # Updates JDK to jdk-21.0.8+9.
 then
-  urls=("https://repo.mongodb.com/yum/redhat/8/mongodb-enterprise/${version_for_url}/${platform}/RPMS/mongodb-enterprise-server-8.0.1-1.el8.${platform}.rpm" "https://downloads.mongodb.com/on-prem-mms/rpm/mongodb-mms-8.0.6.500.20250402T0915Z.x86_64.rpm" "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.6%2B7/OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.6_7.tar.gz" "http://localhost:8080/download/agent/automation/mongodb-mms-automation-agent-manager-latest.${platform}.${distro}.rpm")
+  urls=("https://repo.mongodb.com/yum/redhat/8/mongodb-enterprise/${version_for_url}/${platform}/RPMS/mongodb-enterprise-server-8.0.1-1.el8.${platform}.rpm" "https://downloads.mongodb.com/on-prem-mms/rpm/mongodb-mms-8.0.12.500.20250804T1959Z.x86_64.rpm" "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.8%2B9/OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.8_9.tar.gz" "http://localhost:8080/download/agent/automation/mongodb-mms-automation-agent-manager-latest.${platform}.${distro}.rpm")
 fi
 
-if [[ "$version" == "7.0.15" ]] # Updates JDK to jdk-17.0.13+11.
+if [[ "$version" == "7.0.17" ]] # Updates JDK to jdk-17.0.16+8.
 then
-  urls=("https://repo.mongodb.com/yum/redhat/8/mongodb-enterprise/${version_for_url}/${platform}/RPMS/mongodb-enterprise-server-7.0.0-1.el8.${platform}.rpm" "https://downloads.mongodb.com/on-prem-mms/rpm/mongodb-mms-7.0.10.500.20240731T2149Z.x86_64.rpm" "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.13%2B11/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.13_11.tar.gz" "http://localhost:8080/download/agent/automation/mongodb-mms-automation-agent-manager-latest.${platform}.${distro}.rpm")
-fi
-
-if [[ "$version" == "6.0.25" ]] # Updates JDK to jdk-11.0.24+8
-then
-  urls=("https://repo.mongodb.com/yum/redhat/8/mongodb-enterprise/${version_for_url}/${platform}/RPMS/mongodb-enterprise-server-6.0.0-1.el8.${platform}.rpm" "https://downloads.mongodb.com/on-prem-mms/rpm/mongodb-mms-6.0.25.100.20240807T1538Z.x86_64.rpm" "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.24%2B8/OpenJDK11U-jdk_aarch64_linux_hotspot_11.0.24_8.tar.gz" "http://localhost:8080/download/agent/automation/mongodb-mms-automation-agent-manager-latest.${platform}.${distro}.rpm")
+  urls=("https://repo.mongodb.com/yum/redhat/8/mongodb-enterprise/${version_for_url}/${platform}/RPMS/mongodb-enterprise-server-7.0.0-1.el8.${platform}.rpm" "https://downloads.mongodb.com/on-prem-mms/rpm/mongodb-mms-7.0.17.500.20250806T1728Z.x86_64.rpm" "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.16%2B8/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.16_8.tar.gz" "http://localhost:8080/download/agent/automation/mongodb-mms-automation-agent-manager-latest.${platform}.${distro}.rpm")
 fi
 
 # echo === Downloading AppDB and Ops Manager ===
